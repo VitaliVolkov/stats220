@@ -8,4 +8,4 @@ A little about me:
 - I am taking STATS 220 because I want a deeper understanding of how to use technology and data
 - I am interested in learning about anything to do with data science and using computers to make sense of data
 
-A meme that captures how I currently feel about my university studies is https://tenor.com/view/dog-breathe-deep-breath-sigh-relax-gif-4728107308133039338
+A meme that captures how I currently feel about my university studies is ![](https://tenor.com/view/dog-breathe-deep-breath-sigh-relax-gif-4728107308133039338)
