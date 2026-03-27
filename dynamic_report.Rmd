@@ -1,0 +1,127 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  max-width: fit-content;
+  margin-inline: auto;
+}
+
+.uline {
+  text-decoration: underline;
+}
+```
+
+## Multi-Platform Advertisement Interaction
+
+<p class = "uline">***Purpose:***</p>
+
+This report looks at the types of advertisements observed across various 
+platforms and the interactions with them. 
+
+The data was collected through observational logging.
+
+
+
+```{r}
+
+# Setup
+
+library(tidyverse)
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSv0fWW7g88VCzcYOgfHWKOUhj4WfkzCwnJSfSTinA4iSUIoW42znk4u86luNA9de59NnlVsAbtnUzv/pub?gid=122816818&single=true&output=csv")
+
+
+# Renaming Variables for clarity
+latest_data <- logged_data %>%
+                      rename(Platform = 2,
+                            Category = 3,
+                            Ad_Length = 4,
+                            Did_Interact = 5,
+                            How_Interact = 6
+                            )
+
+
+# ********** Chosen Data **********
+  
+# Summary Value 1 - Category Totals
+cat_total <- count(latest_data, Category)
+
+# Summary Value 2 - Platform Totals
+platform_total <- count(latest_data, Platform)
+
+# Summary Value 3 - Mean Advertisement Length
+mean_length <- latest_data$Ad_Length %>% mean() %>% round(2)
+
+# Summary Value 4 - Total Advertisements
+total_data <- nrow(latest_data)
+
+
+```
+
+<p class = "uline">***Dynamic Facts:***</p>
+
+- A total of ***`r total_data`*** advertisements were recorded.
+
+- The mean advertisement length is ***`r mean_length`*** seconds.
+
+
+## Dynamic Graphs
+
+### Advertisements by Category
+
+```{r}
+# Chart 1 - Advertisements by Category
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = Category),
+           fill = "#ADD8E6") +
+  labs(title = "Plot of Advertisement Categories",
+       x = "Category",
+       y = "Count")
+
+```
+
+
+### Advertisements by Platform
+
+```{r}
+# Chart 2 - Advertisements by Platform
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = Platform),
+           fill = "#88E788") +
+  labs(title = "Plot of Advertisement Platforms",
+       x = "Platform",
+       y = "Count")
+
+```
+
+
+### Advertisement Interactions
+
+```{r}
+# Chart 3 - Advertisement Interactions
+latest_data %>%
+  # Splitting multiple selections up
+  separate_rows(How_Interact, sep = ", ") %>%
+  # Removing NA values
+  drop_na() %>%
+  ggplot() +
+  geom_bar(aes(x = How_Interact),
+           fill = "#CBC3E3") +
+  labs(title = "Plot of Advertisement Interaction Types",
+       x = "Interaction Types",
+       y = "Count")
+```
+
+
