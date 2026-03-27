@@ -16,14 +16,11 @@ body {
   margin-inline: auto;
 }
 
-.uline {
-  text-decoration: underline;
-}
 ```
 
 ## Multi-Platform Advertisement Interaction
 
-<p class = "uline">***Purpose:***</p>
+***Purpose:***
 
 This report looks at the types of advertisements observed across various 
 platforms and the interactions with them. 
@@ -68,7 +65,7 @@ total_data <- nrow(latest_data)
 
 ```
 
-<p class = "uline">***Dynamic Facts:***</p>
+***Dynamic Facts:***
 
 - A total of ***`r total_data`*** advertisements were recorded.
 
